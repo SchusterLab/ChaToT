@@ -1,5 +1,1 @@
-# ChaToT
-
-## hi
-Standard transmon characterization code written in tprocv2
-<u> hi </u>
+# ChaToT: **Cha**rles **T**procv2 **o**n **T**ransmons
