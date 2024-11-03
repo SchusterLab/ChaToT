@@ -1,2 +1,1 @@
-# tprocv2_transmons
-Standard transmon characterization code written in tprocv2
+# ChaToT: Charles Tprocv2 on Transmons
