@@ -8,7 +8,9 @@
 3. enter the virtual environment by typing "activate"
 
 4. Install the following packages: slab, pyro4, qick. Do this by entering the following commands while inside the virtual environment:
-	- pip install git+https://github.com/SchusterLab/slab, pyro4, qick, jupyter, matplotlib, h5py, scipy, tabulate
+```
+pip install git+https://github.com/SchusterLab/slab, pyro4, qick, jupyter, matplotlib, h5py, scipy, tabulate
+```
 
 5. Navigate out of the Scripts folder into your virtual environment folder and start a jupyter server, navigate to the Utilities folder, and start the nameserver by running the single code cell in the "chatot_nameserver" notebook
 
