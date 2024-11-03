@@ -13,7 +13,7 @@ TODO: finish this up using the regular slab experiment.py
 """
 from slab import experiment, AttrDict
 from slab.experiment import Experiment # ?
-from slab import InstrumentManager
+from qick.pyro import make_proxy
 from qick import *
 from qick.asm_v2 import AveragerProgramV2
 import os
@@ -60,16 +60,23 @@ class tof_pulse(AveragerProgramV2):
 
 class time_of_flight(Experiment):
     # import config file, specify data path
-    def __init__(self, path='', soccfg=None, prefix='time_of_flight', config_file=None, liveplot_enabled=False, **kwargs):
+    def __init__(self, path='', prefix='time_of_flight', config_file=None, liveplot_enabled=True, **kwargs):
         if not os.path.exists(path):
             print(f'Creating directory {path}')
             os.makedirs(path)
-        super().__init__(path=path, soccfg=soccfg, prefix=prefix, config_file=config_file, liveplot_enabled=liveplot_enabled, **kwargs)
+        super().__init__(path=path, prefix=prefix, config_file=config_file, liveplot_enabled=liveplot_enabled, **kwargs)
         
     # run the experiment
-    def acquire(self, soc=None, progress=False, save=True):
+    def acquire(self, progress=False, save=True):
         cfg = self.cfg
-        prog = tof_pulse(soccfg=self.soccfg, reps=1, final_delay=None, cfg=cfg)
+
+        ns_address = cfg.instrument_manager.ns_address
+        ns_port = cfg.instrument_manager.ns_port
+        proxy_name = cfg.instrument_manager.proxy_name
+
+        soc, soccfg = make_proxy(ns_host=ns_address, ns_port=ns_port, proxy_name=proxy_name)
+        
+        prog = tof_pulse(soccfg=soccfg, reps=1, final_delay=None, cfg=cfg)
         iq_list = prog.acquire_decimated(soc, soft_avgs=cfg.readout.n_avg)
         t = prog.get_time_axis(ro_index=0)
         data = (t, iq_list[0])
