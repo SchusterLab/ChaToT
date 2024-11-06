@@ -6,7 +6,7 @@ This class defines programs that can be run to determine the time of flight
 of output pulses in order to calibrate the ADC trigger offset
 
 
-TODO: finish this up using the regular slab experiment.py
+TODO: add data saving that actually works
 
 
 
