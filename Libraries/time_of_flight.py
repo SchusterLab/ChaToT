@@ -106,7 +106,7 @@ class time_of_flight(Experiment):
         if save: fig.savefig(self.path)
         return
 
-    def savedataXD(self):
+    def savedata(self):
         with self.datafile() as f:
             for k, d in data.items():
                 f.add(k, np.array(d))
