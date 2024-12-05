@@ -87,7 +87,9 @@ class qubit_twotone_spectroscopy(Experiment):
         relaxation_time = cfg.expt.relaxation_time
         
         fs = np.linspace(center - span, center + span, steps)
+        # print(prog.get_pulse_param("mypulse","freq"))
 
+        # change this to use instrument manager
         soc, soccfg = make_proxy(ns_host=ns_address, ns_port=ns_port, proxy_name=proxy_name)
         
         prog = twotone_pulse(soccfg=soccfg, reps=n_avg, final_delay=relaxation_time, cfg=cfg)
