@@ -23,7 +23,6 @@ class twotone_pulse(AveragerProgramV2):
         qubit_pulse_len = cfg.expt.qubit_pulse_len
         qubit_phase = cfg.expt.qubit_phase
         trig_offset = cfg.expt.trig_offset
-        delay = cfg.expt.delay
         relaxation_time = cfg.expt.relaxation_time
         steps = cfg.expt.steps
 
@@ -43,11 +42,21 @@ class twotone_pulse(AveragerProgramV2):
                        gain=res_gain, 
                       )
 
-        self.add_gauss(ch=qubit_gen_ch, name="ramp", sigma=qubit_pulse_len/10, length=qubit_pulse_len, even_length=True)
+        # gaussian qubit pulses exceed buffer length for some reason
+
+        # self.add_gauss(ch=qubit_gen_ch, name="ramp", sigma=qubit_pulse_len/10, length=qubit_pulse_len, even_length=True)
+
+        # self.add_pulse(ch=qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
+        #                style="arb", 
+        #                envelope="ramp", 
+        #                freq=qubit_freq, 
+        #                phase=qubit_phase,
+        #                gain=qubit_gain, 
+        #               )
 
         self.add_pulse(ch=qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
-                       style="arb", 
-                       envelope="ramp", 
+                       style="const", 
+                       length=qubit_pulse_len,
                        freq=qubit_freq, 
                        phase=qubit_phase,
                        gain=qubit_gain, 
@@ -60,12 +69,12 @@ class twotone_pulse(AveragerProgramV2):
         res_gen_ch = cfg.soc.res_gen_ch
         qubit_gen_ch = cfg.soc.qubit_gen_ch
         trig_offset = cfg.expt.trig_offset
-        delay = cfg.expt.delay
+        qubit_pulse_len = cfg.expt.qubit_pulse_len
         
         self.send_readoutconfig(ch=ro_ch, name='ro', t=0)
         self.pulse(ch=qubit_gen_ch, name="qubit_pulse", t=0)
-        self.pulse(ch=res_gen_ch, name="res_pulse", t=delay)
-        self.trigger(ros=[ro_ch], pins=[0], t=trig_offset+delay, ddr4=True)
+        self.pulse(ch=res_gen_ch, name="res_pulse", t=qubit_pulse_len+1)
+        self.trigger(ros=[ro_ch], pins=[0], t=trig_offset+qubit_pulse_len, ddr4=False)
 
 
 class qubit_twotone_spectroscopy(Experiment):
@@ -87,9 +96,7 @@ class qubit_twotone_spectroscopy(Experiment):
         relaxation_time = cfg.expt.relaxation_time
         
         fs = np.linspace(center - span, center + span, steps)
-        # print(prog.get_pulse_param("mypulse","freq"))
 
-        # change this to use instrument manager
         soc, soccfg = make_proxy(ns_host=ns_address, ns_port=ns_port, proxy_name=proxy_name)
         
         prog = twotone_pulse(soccfg=soccfg, reps=n_avg, final_delay=relaxation_time, cfg=cfg)
@@ -106,7 +113,7 @@ class qubit_twotone_spectroscopy(Experiment):
         q = data["Q"]
         mag = np.abs(i + 1j * q)
         fig = plt.figure(figsize=(9,7))
-        plt.plot(fs, mag)
+        plt.plot(fs, mag, '-o')
         plt.ylabel("a.u.")
         plt.xlabel("MHz")
         plt.title("Qubit Twotone Spectroscopy")
