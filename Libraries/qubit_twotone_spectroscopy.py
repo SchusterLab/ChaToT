@@ -26,11 +26,11 @@ class twotone_pulse(AveragerProgramV2):
         relaxation_time = cfg.expt.relaxation_time
         steps = cfg.expt.steps
 
-        self.declare_gen(ch=res_gen_ch, nqz=1)
+        self.declare_gen(ch=res_gen_ch, nqz=1) # nqz=2
         self.declare_gen(ch=qubit_gen_ch, nqz=1)
         self.declare_readout(ch=ro_ch, length=res_pulse_len)
 
-        self.add_loop(name="freq_loop", count=steps)
+        self.add_loop(name="freq_loop", count=steps) # make loop wider
 
         self.add_readoutconfig(ch=ro_ch, name='ro', freq=res_freq, gen_ch=res_gen_ch)
 
@@ -56,7 +56,7 @@ class twotone_pulse(AveragerProgramV2):
 
         self.add_pulse(ch=qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
                        style="const", 
-                       length=qubit_pulse_len,
+                       length=qubit_pulse_len, # ~T1 time
                        freq=qubit_freq, 
                        phase=qubit_phase,
                        gain=qubit_gain, 
@@ -73,7 +73,7 @@ class twotone_pulse(AveragerProgramV2):
         
         self.send_readoutconfig(ch=ro_ch, name='ro', t=0)
         self.pulse(ch=qubit_gen_ch, name="qubit_pulse", t=0)
-        self.pulse(ch=res_gen_ch, name="res_pulse", t=qubit_pulse_len+1)
+        self.pulse(ch=res_gen_ch, name="res_pulse", t=qubit_pulse_len+1) # 0.01
         self.trigger(ros=[ro_ch], pins=[0], t=trig_offset+qubit_pulse_len, ddr4=False)
 
 
