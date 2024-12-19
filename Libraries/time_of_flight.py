@@ -16,51 +16,36 @@ cfg.expt = {
 }
 
 """
-from slab import experiment, AttrDict
-from slab.experiment import Experiment # ?
+
+from slab import Experiment, AttrDict
 from qick.pyro import make_proxy
 from qick import *
 from qick.asm_v2 import AveragerProgramV2
-import os, h5py, json
+import os, h5py
 import numpy as np
 import matplotlib.pyplot as plt
+from slab.instruments import InstrumentManager
 
-# for tProc-configred outputs
 class tof_pulse(AveragerProgramV2):
     def _initialize(self, cfg):
-        cfg = AttrDict(cfg)
+        self.cfg = AttrDict(cfg)
         
-        ro_ch = cfg.soc.ro_ch
-        gen_ch = cfg.soc.res_gen_ch
-        ro_len = cfg.expt.ro_len
-        pulse_len = cfg.expt.pulse_len
-        freq = cfg.expt.freq
-        phase = cfg.expt.phase
-        gain = cfg.expt.gain
-        trig_offset = cfg.expt.trig_offset
-        
-        self.declare_gen(ch=gen_ch, nqz=1)
-        self.declare_readout(ch=ro_ch, length=ro_len)
-        self.add_readoutconfig(ch=ro_ch, name='ro', freq=freq, gen_ch=gen_ch)
+        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=1)
+        self.declare_readout(ch=self.cfg.soc.ro_ch, length=self.cfg.expt.ro_len)
+        self.add_readoutconfig(ch=self.cfg.soc.ro_ch, name='ro', freq=self.cfg.expt.freq, gen_ch=self.cfg.soc.res_gen_ch)
 
-        self.add_pulse(ch=gen_ch, name="pulse", ro_ch=ro_ch, 
+        self.add_pulse(ch=self.cfg.soc.res_gen_ch, name="pulse", ro_ch=self.cfg.soc.ro_ch, 
                        style="const", 
-                       length=pulse_len,
-                       freq=freq, 
-                       phase=phase,
-                       gain=gain, 
+                       length=self.cfg.expt.pulse_len,
+                       freq=self.cfg.expt.freq, 
+                       phase=self.cfg.expt.phase,
+                       gain=self.cfg.expt.gain, 
                       )
 
     def _body(self, cfg):
-
-        cfg = AttrDict(cfg)
-        ro_ch = cfg.soc.ro_ch
-        gen_ch = cfg.soc.res_gen_ch
-        trig_offset = cfg.expt.trig_offset
-        
-        self.send_readoutconfig(ch=ro_ch, name='ro', t=0)
-        self.trigger(ros=[ro_ch], pins=[0], t=trig_offset, ddr4=True)
-        self.pulse(ch=gen_ch, name="pulse", t=0)
+        self.send_readoutconfig(ch=self.cfg.soc.ro_ch, name='ro', t=0)
+        self.trigger(ros=[self.cfg.soc.ro_ch], pins=[0], t=self.cfg.expt.trig_offset, ddr4=False)
+        self.pulse(ch=self.cfg.soc.res_gen_ch, name="pulse", t=0)
         
 
 class time_of_flight(Experiment):
@@ -70,16 +55,9 @@ class time_of_flight(Experiment):
         
     # run the experiment
     def acquire(self, progress=False):
-        cfg = self.cfg
-
-        ns_address = cfg.instrument_manager.ns_address
-        ns_port = cfg.instrument_manager.ns_port
-        proxy_name = cfg.instrument_manager.proxy_name
-
-        soc, soccfg = make_proxy(ns_host=ns_address, ns_port=ns_port, proxy_name=proxy_name)
-        
-        prog = tof_pulse(soccfg=soccfg, reps=1, final_delay=None, cfg=cfg)
-        iq_list = prog.acquire_decimated(soc, soft_avgs=cfg.expt.n_avg)
+        super().acquire()
+        prog = tof_pulse(soccfg=self.soccfg, reps=1, final_delay=None, cfg=self.cfg)
+        iq_list = prog.acquire_decimated(self.soc, soft_avgs=self.cfg.expt.n_avg)
         t = prog.get_time_axis(ro_index=0)
         data = {"I": iq_list[0][:,0], "Q": iq_list[0][:,1], "time": t}
         self.data = data
@@ -107,23 +85,6 @@ class time_of_flight(Experiment):
                 os.makedirs(self.path)
             fig.savefig(self.path)
         return
-
-    def savedata(self): # I should really find a better way to do all this that is more friendly with different ways of saving/storing data and configs in SLab
-        if not os.path.exists(self.path):
-            print(f'Creating directory {self.path}')
-            os.makedirs(self.path)
-
-        # save data in h5
-        with h5py.File(self.path + "data.h5", "w") as h5file:
-            for key, value in self.data.items():
-                h5file.create_dataset(key, data=value)
-        print("Data saved to " + self.path + "data.h5")
-
-        # save config
-        # I should find a better way to do this
-        with open(self.path + "cfg.json", "w") as cfg_file:
-            json.dump(self.cfg, cfg_file, indent=4)
-        print("Config saved to " + self.path + "cfg.json")
         
         
         
