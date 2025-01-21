@@ -7,7 +7,7 @@ import os, h5py, json
 import numpy as np
 import matplotlib.pyplot as plt
 
-class twotone_pulse(AveragerProgramV2):
+class rabi_pulse(AveragerProgramV2):
     def _initialize(self, cfg):
         cfg = AttrDict(cfg)
 
@@ -15,7 +15,7 @@ class twotone_pulse(AveragerProgramV2):
         self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
         self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
 
-        self.add_loop(name="freq_loop", count=cfg.expt.steps)
+        self.add_loop(name="gain_loop", count=cfg.expt.steps)
 
         self.add_readoutconfig(ch=cfg.soc.ro_ch, name='ro', freq=cfg.expt.res_freq, gen_ch=cfg.soc.res_gen_ch)
 
@@ -27,6 +27,16 @@ class twotone_pulse(AveragerProgramV2):
                        gain=cfg.expt.res_gain, 
                       )
 
+        # constant qubit pulse
+        # self.add_pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
+        #                style="const", 
+        #                length=cfg.expt.qubit_pulse_len,
+        #                freq=cfg.expt.qubit_freq, 
+        #                phase=cfg.expt.qubit_phase,
+        #                gain=cfg.expt.qubit_gain + 0.05, 
+        #               )
+
+        # gaussian qubit pulse 
         self.add_gauss(ch=cfg.soc.qubit_gen_ch, name="ramp", sigma=cfg.expt.qubit_pulse_len/10, length=cfg.expt.qubit_pulse_len, even_length=True)
         self.add_pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
                        style="arb", 
@@ -41,37 +51,34 @@ class twotone_pulse(AveragerProgramV2):
         
         self.send_readoutconfig(ch=cfg.soc.ro_ch, name='ro', t=0)
         self.pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", t=0)
-        self.pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", t=cfg.expt.qubit_pulse_len+1)
+        self.pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", t=cfg.expt.qubit_pulse_len+0.01)
         self.trigger(ros=[cfg.soc.ro_ch], pins=[0], t=cfg.expt.trig_offset+cfg.expt.qubit_pulse_len, ddr4=False)
 
 
-class qubit_twotone_spectroscopy(Experiment):
-    # import config file, specify data path
-    def __init__(self, path='', prefix='qubit_twotone_spectroscopy', config_file=None, liveplot_enabled=True, **kwargs):
+class rabi_gain(Experiment):
+    def __init__(self, path='', prefix='rabi_gain', config_file=None, liveplot_enabled=True, **kwargs):
         super().__init__(path=path, prefix=prefix, config_file=config_file, liveplot_enabled=liveplot_enabled, **kwargs)
-        
-    # run the experiment
+        return
+
     def acquire(self, progress=False):
         super().acquire()
-        fs = np.linspace(self.cfg.expt.center - self.cfg.expt.span, self.cfg.expt.center + self.cfg.expt.span, self.cfg.expt.steps)
-        prog = twotone_pulse(soccfg=self.soccfg, reps=self.cfg.expt.n_avg, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
+        prog = rabi_pulse(soccfg=self.soccfg, reps=self.cfg.expt.n_avg, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
+        gs = np.linspace(self.cfg.expt.min_gain, self.cfg.expt.max_gain, self.cfg.expt.steps) # relaxation time should be somewhere else in the cfg
         iq_list = prog.acquire(self.soc)
-        data = {"I": iq_list[0][0][:,0], "Q": iq_list[0][0][:,1], "fs": fs}
-        self.data = data
-        return data
+        self.data = {"I": iq_list[0][0][:,0], "Q": iq_list[0][0][:,1], "gs": gs}
+        return self.data
 
-    # plot results
     def display(self, save=True):
-        data = self.data
-        fs = data["fs"]
-        i = data["I"]
-        q = data["Q"]
+        gs = self.data["gs"]
+        i = self.data["I"]
+        q = self.data["Q"]
         mag = np.abs(i + 1j * q)
         fig = plt.figure(figsize=(9,7))
-        plt.plot(fs, mag, '-o')
-        plt.ylabel("a.u.")
-        plt.xlabel("MHz")
-        plt.title("Qubit Twotone Spectroscopy")
+        plt.plot(gs, mag, '-o', label="Magnitude")
+        plt.title("Gain Rabi")
+        plt.xlabel("Gain")
+        plt.ylabel("Amplitude")
+        plt.legend()
         plt.show()
         if save:
             if not os.path.exists(self.path):
@@ -79,3 +86,10 @@ class qubit_twotone_spectroscopy(Experiment):
                 os.makedirs(self.path)
             fig.savefig(self.path)
         return
+        
+        
+
+
+
+
+

@@ -12,8 +12,8 @@ class res_spec_pulse(AveragerProgramV2):
     def _initialize(self, cfg):
         self.cfg = AttrDict(cfg)
         
-        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=1)
-        self.declare_readout(ch=self.cfg.soc.ro_ch, length=self.cfg.expt.ro_len)
+        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=2)
+        self.declare_readout(ch=self.cfg.soc.ro_ch, length=self.cfg.expt.pulse_len)
 
         self.add_loop(name='freq_loop', count=self.cfg.expt.steps)
     
