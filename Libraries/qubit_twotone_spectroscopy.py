@@ -11,70 +11,38 @@ class twotone_pulse(AveragerProgramV2):
     def _initialize(self, cfg):
         cfg = AttrDict(cfg)
 
-        ro_ch = cfg.soc.ro_ch
-        qubit_gen_ch = cfg.soc.qubit_gen_ch
-        res_gen_ch = cfg.soc.res_gen_ch
-        res_freq = cfg.expt.res_freq
-        res_gain = cfg.expt.res_gain
-        res_pulse_len = cfg.expt.res_pulse_len
-        res_phase = cfg.expt.res_phase
-        qubit_gain = cfg.expt.qubit_gain
-        qubit_freq = cfg.expt.qubit_freq
-        qubit_pulse_len = cfg.expt.qubit_pulse_len
-        qubit_phase = cfg.expt.qubit_phase
-        trig_offset = cfg.expt.trig_offset
-        relaxation_time = cfg.expt.relaxation_time
-        steps = cfg.expt.steps
+        self.declare_gen(ch=cfg.soc.res_gen_ch, nqz=2)
+        self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
+        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
 
-        self.declare_gen(ch=res_gen_ch, nqz=1) # nqz=2
-        self.declare_gen(ch=qubit_gen_ch, nqz=1)
-        self.declare_readout(ch=ro_ch, length=res_pulse_len)
+        self.add_loop(name="freq_loop", count=cfg.expt.steps)
 
-        self.add_loop(name="freq_loop", count=steps) # make loop wider
+        self.add_readoutconfig(ch=cfg.soc.ro_ch, name='ro', freq=cfg.expt.res_freq, gen_ch=cfg.soc.res_gen_ch)
 
-        self.add_readoutconfig(ch=ro_ch, name='ro', freq=res_freq, gen_ch=res_gen_ch)
-
-        self.add_pulse(ch=res_gen_ch, name="res_pulse", ro_ch=ro_ch, 
+        self.add_pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", ro_ch=cfg.soc.ro_ch, 
                        style="const", 
-                       length=res_pulse_len,
-                       freq=res_freq, 
-                       phase=res_phase,
-                       gain=res_gain, 
+                       length=cfg.expt.res_pulse_len,
+                       freq=cfg.expt.res_freq, 
+                       phase=cfg.expt.res_phase,
+                       gain=cfg.expt.res_gain, 
                       )
 
-        # gaussian qubit pulses exceed buffer length for some reason
-
-        # self.add_gauss(ch=qubit_gen_ch, name="ramp", sigma=qubit_pulse_len/10, length=qubit_pulse_len, even_length=True)
-
-        # self.add_pulse(ch=qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
-        #                style="arb", 
-        #                envelope="ramp", 
-        #                freq=qubit_freq, 
-        #                phase=qubit_phase,
-        #                gain=qubit_gain, 
-        #               )
-
-        self.add_pulse(ch=qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
-                       style="const", 
-                       length=qubit_pulse_len, # ~T1 time
-                       freq=qubit_freq, 
-                       phase=qubit_phase,
-                       gain=qubit_gain, 
+        self.add_gauss(ch=cfg.soc.qubit_gen_ch, name="ramp", sigma=cfg.expt.qubit_pulse_len/10, length=cfg.expt.qubit_pulse_len, even_length=True)
+        self.add_pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
+                       style="arb", 
+                       envelope="ramp", 
+                       freq=cfg.expt.qubit_freq, 
+                       phase=cfg.expt.qubit_phase,
+                       gain=cfg.expt.qubit_gain, 
                       )
 
     def _body(self, cfg):
         cfg = AttrDict(cfg)
         
-        ro_ch = cfg.soc.ro_ch
-        res_gen_ch = cfg.soc.res_gen_ch
-        qubit_gen_ch = cfg.soc.qubit_gen_ch
-        trig_offset = cfg.expt.trig_offset
-        qubit_pulse_len = cfg.expt.qubit_pulse_len
-        
-        self.send_readoutconfig(ch=ro_ch, name='ro', t=0)
-        self.pulse(ch=qubit_gen_ch, name="qubit_pulse", t=0)
-        self.pulse(ch=res_gen_ch, name="res_pulse", t=qubit_pulse_len+1) # 0.01
-        self.trigger(ros=[ro_ch], pins=[0], t=trig_offset+qubit_pulse_len, ddr4=False)
+        self.send_readoutconfig(ch=cfg.soc.ro_ch, name='ro', t=0)
+        self.pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", t=0)
+        self.pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", t=cfg.expt.qubit_pulse_len+1)
+        self.trigger(ros=[cfg.soc.ro_ch], pins=[0], t=cfg.expt.trig_offset+cfg.expt.qubit_pulse_len, ddr4=False)
 
 
 class qubit_twotone_spectroscopy(Experiment):
@@ -84,23 +52,10 @@ class qubit_twotone_spectroscopy(Experiment):
         
     # run the experiment
     def acquire(self, progress=False):
-        cfg = self.cfg
-
-        ns_address = cfg.instrument_manager.ns_address
-        ns_port = cfg.instrument_manager.ns_port
-        proxy_name = cfg.instrument_manager.proxy_name
-        n_avg = cfg.expt.n_avg
-        center = cfg.expt.center
-        span = cfg.expt.span
-        steps = cfg.expt.steps
-        relaxation_time = cfg.expt.relaxation_time
-        
-        fs = np.linspace(center - span, center + span, steps)
-
-        soc, soccfg = make_proxy(ns_host=ns_address, ns_port=ns_port, proxy_name=proxy_name)
-        
-        prog = twotone_pulse(soccfg=soccfg, reps=n_avg, final_delay=relaxation_time, cfg=cfg)
-        iq_list = prog.acquire(soc)
+        super().acquire()
+        fs = np.linspace(self.cfg.expt.center - self.cfg.expt.span, self.cfg.expt.center + self.cfg.expt.span, self.cfg.expt.steps)
+        prog = twotone_pulse(soccfg=self.soccfg, reps=self.cfg.expt.n_avg, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
+        iq_list = prog.acquire(self.soc)
         data = {"I": iq_list[0][0][:,0], "Q": iq_list[0][0][:,1], "fs": fs}
         self.data = data
         return data
@@ -124,26 +79,3 @@ class qubit_twotone_spectroscopy(Experiment):
                 os.makedirs(self.path)
             fig.savefig(self.path)
         return
-
-    def savedata(self): # I should really find a better way to do all this that is more friendly with different ways of saving/storing data and configs in SLab
-                        # I should also turn this into a callable function rather than having it pasted in all my files
-        if not os.path.exists(self.path):
-            print(f'Creating directory {self.path}')
-            os.makedirs(self.path)
-
-        # save data in h5
-        with h5py.File(self.path + "data.h5", "w") as h5file:
-            for key, value in self.data.items():
-                h5file.create_dataset(key, data=value)
-        print("Data saved to " + self.path + "data.h5")
-
-        # save config
-        # I should find a better way to do this
-        if hasattr(self,'cfg'):
-            if 'expt' in self.cfg:
-                for item in self.cfg.expt:
-                    if isinstance(self.cfg.expt[item], QickParam):
-                        self.cfg.expt[item] = 'QickSweep values are stored in data'
-        with open(self.path + "cfg.json", "w") as cfg_file:
-            json.dump(self.cfg, cfg_file, indent=4)
-        print("Config saved to " + self.path + "cfg.json")
