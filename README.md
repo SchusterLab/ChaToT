@@ -22,4 +22,4 @@ pip install git+https://github.com/SchusterLab/slab, pyro4, qick, jupyter, matpl
 
 9. You are now ready to run everything in this repository! Please message me on slack if you have any questions or are having any trouble with anything in this repository
 
-![chatot](https://github.com/SchusterLab/ChaToT/blob/2fb4c3f055dcea4de642e47a49dfd79031bbb430/9b6c156fe8f85a6b8aa0dab9e29e07cc.png)
+<img src="https://github.com/SchusterLab/ChaToT/blob/2fb4c3f055dcea4de642e47a49dfd79031bbb430/9b6c156fe8f85a6b8aa0dab9e29e07cc.png" alt="chatot" width="300" />
