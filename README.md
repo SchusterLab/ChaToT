@@ -12,10 +12,14 @@
 pip install git+https://github.com/SchusterLab/slab, pyro4, qick, jupyter, matplotlib, h5py, scipy, tabulate
 ```
 
-5. Navigate out of the Scripts folder into your virtual environment folder and start a jupyter server, navigate to the Utilities folder, and start the nameserver by running the single code cell in the "chatot_nameserver" notebook
+5. Copy the notebooks and python files from this repository into your virtual environment
 
-6. Connect to the nameserver on the RFSoC board that you are using
+6. Replace the experiment.py and instrumentmanager.py libraries in the slab library with the versions found in the Utilities folder
 
-7. Copy the notebooks and python files from this repository into your virtual environment
+7. Navigate out of the Scripts folder into your virtual environment folder and start a jupyter server, navigate to the Utilities folder, and start the nameserver by running the single code cell in the "chatot_nameserver" notebook
 
-8. You are now ready to run everything in this repository!
+8. Connect to the nameserver on the RFSoC board that you are using
+
+9. You are now ready to run everything in this repository! Please message me on slack if you have any questions or are having any trouble with anything in this repository
+
+
