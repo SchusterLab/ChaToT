@@ -83,26 +83,29 @@ class single_shot(Experiment):
         super().acquire()
         
         prog_ground = single_shot_ground(soccfg=self.soccfg, reps=1, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
-        print(self.soc)
         iq_list_ground = prog_ground.acquire(self.soc)
-        data_g = {"I": iq_list_ground[0][0][:,0], "Q": iq_list_ground[0][0][:,1]}
+        #data_g = {"I": iq_list_ground[0][0][:,0], "Q": iq_list_ground[0][0][:,1]}
         
         prog_excited = single_shot_excited(soccfg=self.soccfg, reps=1, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
         iq_list_excited = prog_excited.acquire(self.soc)
-        data_e = {"I": iq_list_excited[0][0][:,0], "Q": iq_list_excited[0][0][:,1]}
+        #data_e = {"I": iq_list_excited[0][0][:,0], "Q": iq_list_excited[0][0][:,1]}
 
-        self.data = {"ground": data_g, "excited": data_e}
+        #self.data = {"ground": data_g, "excited": data_e}
+        self.data = {"Ig": iq_list_ground[0][0][:,0], "Qg": iq_list_ground[0][0][:,1], "Ie": iq_list_excited[0][0][:,0], "Qe": iq_list_excited[0][0][:,1]}
         return self.data
 
-    def display(self, save=True):
-        i_g = self.data["ground"]["I"]
-        q_g = self.data["ground"]["Q"]
-        i_e = self.data["excited"]["I"]
-        q_e = self.data["excited"]["Q"]
-        fig = plt.figure(figsize=(9,7))
-        plt.plot(i_g, q_g, '.', color='blue', label='g')
-        plt.plot(i_e, q_e, '.', color='red', label='e')
-        plt.legend()
+    def display(self, save=True): # TODO: rotating data, finding mean, plotting projection
+        i_g = self.data["Ig"]#self.data["ground"]["I"]
+        q_g = self.data["Qg"]#self.data["ground"]["Q"]
+        i_e = self.data["Ie"]#self.data["excited"]["I"]
+        q_e = self.data["Qe"]#self.data["excited"]["Q"]
+        fig, ax = plt.subplots(figsize=(9,7))
+        ax.set_aspect('equal')
+        ax.plot(i_g, q_g, '.', color='blue', label='g')
+        ax.plot(i_e, q_e, '.', color='red', label='e')
+        ax.set_xlabel("I")
+        ax.set_ylabel("Q")
+        ax.legend()
         plt.show()
         if save:
             if not os.path.exists(self.path):
