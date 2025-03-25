@@ -47,6 +47,7 @@ class resonator_spectroscopy(Experiment):
         fs = np.linspace(self.cfg.expt.center - self.cfg.expt.span, self.cfg.expt.center + self.cfg.expt.span, self.cfg.expt.steps)
         data = {"I": iq_list[0][0][:,0], "Q": iq_list[0][0][:,1], "fs": fs}
         self.data = data
+        return data
 
     # plot results
     def display(self, save=True):

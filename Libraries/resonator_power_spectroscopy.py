@@ -10,7 +10,7 @@ class res_power_spec_pulse(AveragerProgramV2):
     def _initialize(self, cfg):
         self.cfg = AttrDict(cfg)
         
-        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=1)
+        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=2)
         self.declare_readout(ch=self.cfg.soc.ro_ch, length=self.cfg.expt.ro_len)
 
         self.add_loop(name='gain_loop', count=self.cfg.expt.gain_steps)
@@ -56,9 +56,13 @@ class resonator_power_spectroscopy(Experiment):
         i = data["I"]
         q = data["Q"]
         mag = np.abs(i + 1j * q)
-        mag_norm = mag
-        for iq in range(len(mag_norm)):
-            mag_norm[iq] = mag_norm[iq] / mag_norm[iq][0]
+        for i in range(len(gs)):
+            mag[i] -= np.mean(mag[i])
+        # col_sums = mag.sum(axis=1)
+        # mag /= col_sums[:, np.newaxis]
+        # mag_norm = mag
+        # for iq in range(len(mag_norm)):
+        #     mag_norm[iq] = mag_norm[iq] / mag_norm[iq][0]
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 14))
         pc = ax1.pcolor(fs, gs, mag)
         cbar = plt.colorbar(pc, ax=ax1)
@@ -69,7 +73,7 @@ class resonator_power_spectroscopy(Experiment):
         ax2.set_ylabel("a.u. (normalized)")
         colors = plt.cm.gist_rainbow(np.linspace(0, 1, self.cfg.expt.gain_steps))
         for i, color in enumerate(colors):
-            ax2.plot(fs, mag_norm[i], "-o", color=color, label=gs[i])
+            ax2.plot(fs, mag[i], "-o", color=color, label=gs[i])
         ax2.legend()
         plt.show()
         if save:

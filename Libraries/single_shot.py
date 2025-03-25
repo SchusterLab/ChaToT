@@ -7,6 +7,77 @@ import os, h5py, json
 import numpy as np
 import matplotlib.pyplot as plt
 
+def hist(data=None, plot=True, ran=1.0): # Shannon Harvey
+    
+    ig = data[0]
+    qg = data[1]
+    ie = data[2]
+    qe = data[3]
+
+    numbins = 200
+    
+    xg, yg = np.median(ig), np.median(qg)
+    xe, ye = np.median(ie), np.median(qe)
+
+    if plot==True:
+        fig, axs = plt.subplots(nrows=1, ncols=3, figsize=(16, 4))
+        fig.tight_layout()
+
+        axs[0].scatter(ig, qg, label='g', color='b', marker='*')
+        axs[0].scatter(ie, qe, label='e', color='r', marker='*')
+        axs[0].scatter(xg, yg, color='k', marker='o')
+        axs[0].scatter(xe, ye, color='k', marker='o')
+        axs[0].set_xlabel('I (a.u.)')
+        axs[0].set_ylabel('Q (a.u.)')
+        axs[0].legend(loc='upper right')
+        axs[0].set_title('Unrotated')
+        axs[0].axis('equal')
+    """Compute the rotation angle"""
+    theta = -np.arctan2((ye-yg),(xe-xg))
+    """Rotate the IQ data"""
+    ig_new = ig*np.cos(theta) - qg*np.sin(theta)
+    qg_new = ig*np.sin(theta) + qg*np.cos(theta) 
+    ie_new = ie*np.cos(theta) - qe*np.sin(theta)
+    qe_new = ie*np.sin(theta) + qe*np.cos(theta)
+    
+    """New means of each blob"""
+    xg, yg = np.median(ig_new), np.median(qg_new)
+    xe, ye = np.median(ie_new), np.median(qe_new)
+    
+    #print(xg, xe)
+    
+    xlims = [xg-ran, xg+ran]
+    ylims = [yg-ran, yg+ran]
+
+    if plot==True:
+        axs[1].scatter(ig_new, qg_new, label='g', color='b', marker='*')
+        axs[1].scatter(ie_new, qe_new, label='e', color='r', marker='*')
+        axs[1].scatter(xg, yg, color='k', marker='o')
+        axs[1].scatter(xe, ye, color='k', marker='o')    
+        axs[1].set_xlabel('I (a.u.)')
+        axs[1].legend(loc='lower right')
+        axs[1].set_title('Rotated')
+        axs[1].axis('equal')
+
+        """X and Y ranges for histogram"""
+        
+        ng, binsg, pg = axs[2].hist(ig_new, bins=numbins, range = xlims, color='b', label='g', alpha=0.5)
+        ne, binse, pe = axs[2].hist(ie_new, bins=numbins, range = xlims, color='r', label='e', alpha=0.5)
+        axs[2].set_xlabel('I(a.u.)')       
+        
+    else:        
+        ng, binsg = np.histogram(ig_new, bins=numbins, range = xlims)
+        ne, binse = np.histogram(ie_new, bins=numbins, range = xlims)
+
+    """Compute the fidelity using overlap of the histograms"""
+    contrast = np.abs(((np.cumsum(ng) - np.cumsum(ne)) / (0.5*ng.sum() + 0.5*ne.sum())))
+    tind=contrast.argmax()
+    threshold=binsg[tind]
+    fid = contrast[tind]
+    axs[2].set_title(f"Fidelity = {fid*100:.2f}%")
+
+    return fid, threshold, theta
+
 # single shot:
 # prepare in ground state, measure, do n times
 # prepare in excited state by measuring pi pulse, measure, do n times
@@ -43,7 +114,7 @@ class single_shot_excited(AveragerProgramV2):
 
         self.declare_gen(ch=cfg.soc.res_gen_ch, nqz=2)
         self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
-        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
+        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len/2)
 
         self.add_loop(name="iter_loop", count=cfg.expt.n_count)
 
@@ -71,7 +142,7 @@ class single_shot_excited(AveragerProgramV2):
         self.send_readoutconfig(ch=cfg.soc.ro_ch, name='ro', t=0)
         self.pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", t=0)
         self.pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", t=cfg.pulses.pi_const.length+0.01)
-        self.trigger(ros=[cfg.soc.ro_ch], pins=[0], t=cfg.expt.trig_offset+cfg.pulses.pi_const.length+0.01, ddr4=True)
+        self.trigger(ros=[cfg.soc.ro_ch], pins=[0], t=cfg.expt.trig_offset+cfg.pulses.pi_const.length, ddr4=True)
 
 
 class single_shot(Experiment):
@@ -99,17 +170,20 @@ class single_shot(Experiment):
         q_g = self.data["Qg"]#self.data["ground"]["Q"]
         i_e = self.data["Ie"]#self.data["excited"]["I"]
         q_e = self.data["Qe"]#self.data["excited"]["Q"]
-        fig, ax = plt.subplots(figsize=(9,7))
-        ax.set_aspect('equal')
-        ax.plot(i_g, q_g, '.', color='blue', label='g')
-        ax.plot(i_e, q_e, '.', color='red', label='e')
-        ax.set_xlabel("I")
-        ax.set_ylabel("Q")
-        ax.legend()
-        plt.show()
+        hist([i_g, q_g, i_e, q_e], ran=5)
+        
         if save:
             if not os.path.exists(self.path):
                 print(f'Creating directory {self.path}')
                 os.makedirs(self.path)
             fig.savefig(self.path)
         return
+
+# steps for rotating the data:
+# 1. find mean of each blob
+# 2. find line between means
+# 3. move data to center of line
+# 4. find angle of line
+# 5. get rotation matrix of this angle
+# 6. multiply each datapoint by this matrix to rotate data
+
