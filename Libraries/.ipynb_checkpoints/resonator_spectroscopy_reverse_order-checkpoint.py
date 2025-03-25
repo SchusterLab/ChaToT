@@ -1,3 +1,19 @@
+"""
+PLEASE READ:
+
+This program is different from resonator_spectroscopy.py. In resonator_spectroscopy.py, frequency is swept
+over once per loop, and these single frequency measurement sweeps are then averaged together. This may potentially
+introduce inaccuracy in resonance measurements, since in many practical experiments the resonance is repeatedly
+measured, and due to thermal effects this repeated measurement may cause what the resonance is for the duration
+of the experiment to be different than the measured resonance from spectroscopy. To remedy this, this program
+sits on a frequency, taking many measurements and averaging them, before moving on to the next frequency, so 
+frequency is only swept through once with all the averages being taken over the course of this single iteration.
+In other words, it performs the two loops, the averaging loop and the frequency sweeping loop, in reverse order.
+Since QICK automatically averages over the reps axis regardless if its the outermost or innermost loop,
+software averaging must be used.
+
+"""
+
 from slab import Experiment, AttrDict
 from qick.pyro import make_proxy
 from qick import *
@@ -14,8 +30,6 @@ class res_spec_pulse(AveragerProgramV2):
         
         self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=2)
         self.declare_readout(ch=self.cfg.soc.ro_ch, length=self.cfg.expt.pulse_len)
-
-        self.add_loop(name='freq_loop', count=self.cfg.expt.steps)
     
         self.add_readoutconfig(ch=self.cfg.soc.ro_ch, name='ro', freq=self.cfg.expt.freq, gen_ch=self.cfg.soc.res_gen_ch)
 
@@ -36,16 +50,20 @@ class res_spec_pulse(AveragerProgramV2):
 
 class resonator_spectroscopy(Experiment):
     # import config file, specify data path
-    def __init__(self, path='', prefix='resonator_spectroscopy', config_file=None, liveplot_enabled=True, **kwargs):
+    def __init__(self, path='', prefix='resonator_spectroscopy_reverse_order', config_file=None, liveplot_enabled=True, **kwargs):
         super().__init__(path=path, prefix=prefix, config_file=config_file, liveplot_enabled=liveplot_enabled, **kwargs)
         
     # run the experiment
     def acquire(self, progress=False):
         super().acquire()
-        prog = res_spec_pulse(soccfg=self.soccfg, reps=self.cfg.expt.n_avg, final_delay=0.5, cfg=self.cfg)
-        iq_list = prog.acquire(self.soc)
         fs = np.linspace(self.cfg.expt.center - self.cfg.expt.span, self.cfg.expt.center + self.cfg.expt.span, self.cfg.expt.steps)
-        data = {"I": iq_list[0][0][:,0], "Q": iq_list[0][0][:,1], "fs": fs}
+        iq_list = []
+        for f in fs:
+            self.cfg.expt.freq = f
+            prog = res_spec_pulse(soccfg=self.soccfg, reps=self.cfg.expt.n_avg, final_delay=0.5, cfg=self.cfg)
+            iq = prog.acquire(self.soc, progress=progress)
+            iq_list.append(iq)
+        data = {"I": np.array(iq_list)[:,0,0,0], "Q": np.array(iq_list)[:,0,0,1], "fs": fs}
         self.data = data
         return data
 
@@ -63,7 +81,7 @@ class resonator_spectroscopy(Experiment):
         plt.xlabel("MHz")
         # plt.xlabel("I")
         # plt.ylabel("Q")
-        plt.title("Resonator Spectroscopy")
+        plt.title("Resonator Spectroscopy (Reverse Order)")
         plt.show()
         if save:
             if not os.path.exists(self.path):

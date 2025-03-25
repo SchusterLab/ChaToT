@@ -1,6 +1,106 @@
 -- Assembler LOG-- 
 
 INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 7
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 10
@@ -14,6 +114,136 @@ INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in 
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
 INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 24
 INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
+INFO : [LIST2BIN] > ##### LIST 2 BIN
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 7
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 10
@@ -25,7 +255,11 @@ INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in 
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 24
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 27
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 29
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 31
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 32
 INFO : [LIST2BIN] > ##### LIST 2 BIN
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 7
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
@@ -38,7 +272,45 @@ INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in 
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 24
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 27
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 29
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 31
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 32
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 7
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 10
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 14
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 27
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 29
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 31
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 32
+INFO : [LIST2BIN] > ##### LIST 2 BIN
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 7
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 10
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 14
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 27
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 29
+INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 31
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 32
 INFO : [LIST2BIN] > ##### LIST 2 BIN
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
@@ -48,10 +320,7 @@ INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in 
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
 INFO : [LIST2BIN] > ##### LIST 2 BIN
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
@@ -61,137 +330,4 @@ INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in 
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
 INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
-INFO : [LIST2BIN] > ##### LIST 2 BIN
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 9
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 11
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 12
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 13
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 15
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 16
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 17
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 19
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 21
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 23
-INFO : [Instruction.PORT_WR] > No time specified for command will use s_time in line 25
-INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 26
+INFO : [COMMAND_TRANSLATION] > Command Wait add one more instruction 20
