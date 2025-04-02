@@ -4,6 +4,7 @@ from qick.pyro import make_proxy
 from qick import *
 from qick.asm_v2 import AveragerProgramV2, QickParam
 import os, h5py, json
+from tqdm.notebook import tqdm
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -76,11 +77,8 @@ def hist(data=None, plot=True, ran=1.0): # Shannon Harvey
     fid = contrast[tind]
     axs[2].set_title(f"Fidelity = {fid*100:.2f}%")
 
-    return fid, threshold, theta
+    return fig
 
-# single shot:
-# prepare in ground state, measure, do n times
-# prepare in excited state by measuring pi pulse, measure, do n times
 
 class single_shot_ground(AveragerProgramV2):
     def _initialize(self, cfg):
@@ -145,8 +143,8 @@ class single_shot_excited(AveragerProgramV2):
         self.trigger(ros=[cfg.soc.ro_ch], pins=[0], t=cfg.expt.trig_offset+cfg.pulses.pi_const.length, ddr4=True)
 
 
-class single_shot(Experiment):
-    def __init__(self, path='', prefix='single_shot', config_file=None, liveplot_enabled=True, **kwargs):
+class single_shot_filtering(Experiment):
+    def __init__(self, path='', prefix='single_shot_filtering', config_file=None, liveplot_enabled=True, **kwargs):
         super().__init__(path=path, prefix=prefix, config_file=config_file, liveplot_enabled=liveplot_enabled, **kwargs)
         return
 
@@ -154,15 +152,22 @@ class single_shot(Experiment):
         super().acquire()
         
         prog_ground = single_shot_ground(soccfg=self.soccfg, reps=1, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
-        iq_list_ground = prog_ground.acquire(self.soc)
-        #data_g = {"I": iq_list_ground[0][0][:,0], "Q": iq_list_ground[0][0][:,1]}
+        iq_list_ground = []
+        for n in tqdm(range(self.cfg.expt.n_count)):
+            iq_list_ground.append(prog_ground.acquire_decimated(self.soc, soft_avgs=1, progress=False)[0])
         
         prog_excited = single_shot_excited(soccfg=self.soccfg, reps=1, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
-        iq_list_excited = prog_excited.acquire(self.soc)
-        #data_e = {"I": iq_list_excited[0][0][:,0], "Q": iq_list_excited[0][0][:,1]}
+        iq_list_excited = []
+        for n in tqdm(range(self.cfg.expt.n_count)):
+            iq_list_excited.append(prog_excited.acquire_decimated(self.soc, soft_avgs=1, progress=False)[0])
 
-        #self.data = {"ground": data_g, "excited": data_e}
-        self.data = {"Ig": iq_list_ground[0][0][:,0], "Qg": iq_list_ground[0][0][:,1], "Ie": iq_list_excited[0][0][:,0], "Qe": iq_list_excited[0][0][:,1]}
+        t = prog_ground.get_time_axis(ro_index=0) # this may cause problems
+        Ig_filtered = np.array(iq_list_ground)[:,:,0] * self.cfg.expt.filter(len(t))
+        Qg_filtered = np.array(iq_list_ground)[:,:,0] * self.cfg.expt.filter(len(t))
+        Ie_filtered = np.array(iq_list_excited)[:,:,0] * self.cfg.expt.filter(len(t))
+        Qe_filtered = np.array(iq_list_excited)[:,:,0] * self.cfg.expt.filter(len(t))
+
+        self.data = {"Ig": Ig_filtered, "Qg": Qg_filtered, "Ie": Ie_filtered, "Qe": Qe_filtered}
         return self.data
 
     def display(self, save=True):
@@ -170,7 +175,7 @@ class single_shot(Experiment):
         q_g = self.data["Qg"]
         i_e = self.data["Ie"]
         q_e = self.data["Qe"]
-        hist([i_g, q_g, i_e, q_e], ran=5)
+        fig = hist([i_g, q_g, i_e, q_e], ran=5)
         
         if save:
             if not os.path.exists(self.path):
@@ -178,4 +183,15 @@ class single_shot(Experiment):
                 os.makedirs(self.path)
             fig.savefig(self.path)
         return
+
+
+
+
+
+
+
+
+
+
+
 
