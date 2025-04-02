@@ -3,7 +3,7 @@ __author__ = 'Nitrogen'
 # from liveplot import LivePlotClient
 # from dataserver import dataserver_client
 import os.path, os # ?
-import h5py, json
+import h5py, json, inspect
 from qick.asm_v2 import QickParam
 from qick import *
 
@@ -107,6 +107,8 @@ class Experiment:
                 for item in self.cfg.expt:
                     if isinstance(self.cfg.expt[item], QickParam):
                         self.cfg.expt[item] = 'QickSweep values are stored in data'
+                    if str(type(self.cfg.expt[item])) == "<class 'function'>": # i added this
+                        self.cfg.expt[item] = inspect.getsource(self.cfg.expt[item])
         with open(self.path + "cfg.json", "w") as cfg_file:
             json.dump(self.cfg, cfg_file, indent=4)
         print("Config saved to " + self.path + "cfg.json")
