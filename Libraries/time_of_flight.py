@@ -29,8 +29,10 @@ from slab.instruments import InstrumentManager
 class tof_pulse(AveragerProgramV2):
     def _initialize(self, cfg):
         self.cfg = AttrDict(cfg)
+
+        # mixer_freq=cfg.expt.freq
         
-        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=2)
+        self.declare_gen(ch=self.cfg.soc.res_gen_ch, nqz=2)#, mixer_freq=self.cfg.expt.freq)
         self.declare_readout(ch=self.cfg.soc.ro_ch, length=self.cfg.expt.ro_len)
         self.add_readoutconfig(ch=self.cfg.soc.ro_ch, name='ro', freq=self.cfg.expt.freq, gen_ch=self.cfg.soc.res_gen_ch)
 

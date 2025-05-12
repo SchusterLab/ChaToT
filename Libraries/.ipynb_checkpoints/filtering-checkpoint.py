@@ -84,15 +84,15 @@ class excited_filtered(AveragerProgramV2):
     def _initialize(self, cfg):
         cfg = AttrDict(cfg)
 
-        #self.declare_gen(ch=cfg.soc.res_gen_ch, nqz=2)
-        self.declare_gen(ch=8, nqz=2, mixer_freq=cfg.expt.res_freq) # loopback
+        self.declare_gen(ch=cfg.soc.res_gen_ch, nqz=2)
+        # self.declare_gen(ch=8, nqz=2, mixer_freq=cfg.expt.res_freq) # loopback
         self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
-        #self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
-        self.declare_readout(ch=1, length=cfg.expt.res_pulse_len) # loopback
+        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
+        # self.declare_readout(ch=1, length=cfg.expt.res_pulse_len) # loopback
 
-        self.add_readoutconfig(ch=1, name='ro', freq=cfg.expt.res_freq, gen_ch=8)
+        self.add_readoutconfig(ch=cfg.soc.ro_ch, name='ro', freq=cfg.expt.res_freq, gen_ch=cfg.soc.res_gen_ch)
 
-        self.add_pulse(ch=8, name="res_pulse", ro_ch=1, 
+        self.add_pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", ro_ch=cfg.soc.ro_ch, 
                        style="const", 
                        length=cfg.expt.res_pulse_len,
                        freq=cfg.expt.res_freq, 
@@ -111,10 +111,10 @@ class excited_filtered(AveragerProgramV2):
 
     def _body(self, cfg):
         cfg = AttrDict(cfg)
-        self.send_readoutconfig(ch=1, name='ro', t=0)
+        self.send_readoutconfig(ch=cfg.soc.ro_ch, name='ro', t=0)
         self.pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", t=0)
-        self.pulse(ch=8, name="res_pulse", t=cfg.pulses.pi_const.length+0.01)
-        self.trigger(ros=[1], pins=[0], t=cfg.expt.trig_offset+cfg.pulses.pi_const.length, ddr4=True)
+        self.pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", t=cfg.pulses.pi_const.length+0.01)
+        self.trigger(ros=[cfg.soc.ro_ch], pins=[0], t=cfg.expt.trig_offset+cfg.pulses.pi_const.length, ddr4=True)
 
 class filtering(Experiment):
     def __init__(self, path='', prefix='filtering', config_file=None, liveplot_enabled=True, **kwargs):

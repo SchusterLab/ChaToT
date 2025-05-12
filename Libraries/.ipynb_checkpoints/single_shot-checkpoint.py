@@ -76,7 +76,7 @@ def hist(data=None, plot=True, ran=1.0): # Shannon Harvey
     fid = contrast[tind]
     axs[2].set_title(f"Fidelity = {fid*100:.2f}%")
 
-    return fid, threshold, theta
+    return fig
 
 # single shot:
 # prepare in ground state, measure, do n times
@@ -170,7 +170,7 @@ class single_shot(Experiment):
         q_g = self.data["Qg"]
         i_e = self.data["Ie"]
         q_e = self.data["Qe"]
-        hist([i_g, q_g, i_e, q_e], ran=5)
+        fig = hist([i_g, q_g, i_e, q_e], ran=5)
         
         if save:
             if not os.path.exists(self.path):

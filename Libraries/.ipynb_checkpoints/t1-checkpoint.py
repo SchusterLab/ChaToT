@@ -21,8 +21,6 @@ class t1_pulse(AveragerProgramV2):
         self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
 
         self.add_loop(name="delay_loop", count=cfg.expt.steps)
-        # self.delay = cfg.expt.delay
-        # print(self.delay)
 
         self.add_readoutconfig(ch=cfg.soc.ro_ch, name='ro', freq=cfg.expt.res_freq, gen_ch=cfg.soc.res_gen_ch)
 
@@ -34,28 +32,17 @@ class t1_pulse(AveragerProgramV2):
                        gain=cfg.expt.res_gain, 
                       )
 
-        # I will use constant pulses for now, I will eventually want to change to using gaussian pulses
+        self.add_gauss(ch=cfg.soc.qubit_gen_ch, name="ramp", sigma=cfg.pulses.pi_gaus.length/10, length=cfg.pulses.pi_gaus.length, even_length=True)
         self.add_pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", ro_ch=None, 
-                       style="const", 
-                       length=cfg.pulses.pi_const.length,
-                       freq=cfg.pulses.pi_const.freq,
-                       phase=cfg.pulses.pi_const.phase,
-                       gain=cfg.pulses.pi_const.gain,
+                       style="arb", 
+                       envelope="ramp", 
+                       freq=cfg.pulses.pi_gaus.freq, 
+                       phase=cfg.pulses.pi_gaus.phase,
+                       gain=cfg.pulses.pi_gaus.gain
                       )
-
-        # this pulse exists to create delay that can be looped over in firmware
-        # self.add_pulse(ch_cfg.soc.qubit_gen_ch, name="delay", ro_ch=None,
-        #                style="const",
-        #                length=cfg.expt.delay,
-        #                freq=cfg.expt.res_freq, # this really can be anything
-        #                phase=cfg.expt.res_phase, # this also can be anything
-        #                gain=0,
-        #               )
 
     def _body(self, cfg):
         cfg = AttrDict(cfg)
-
-        #self.add_loop(name="delay_loop", count=cfg.expt.steps)
         
         self.send_readoutconfig(ch=cfg.soc.ro_ch, name='ro', t=0)
         self.pulse(ch=cfg.soc.qubit_gen_ch, name="qubit_pulse", t=0)
