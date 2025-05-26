@@ -58,7 +58,7 @@ class time_of_flight(Experiment):
     # run the experiment
     def acquire(self, progress=False):
         super().acquire()
-        prog = tof_pulse(soccfg=self.soccfg, reps=1, final_delay=None, cfg=self.cfg)
+        prog = tof_pulse(soccfg=self.soccfg, reps=1, final_delay=self.cfg.expt.relaxation_time, cfg=self.cfg)
         iq_list = prog.acquire_decimated(self.soc, soft_avgs=self.cfg.expt.n_avg)
         t = prog.get_time_axis(ro_index=0)
         data = {"I": iq_list[0][:,0], "Q": iq_list[0][:,1], "time": t}
