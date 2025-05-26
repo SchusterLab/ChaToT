@@ -88,8 +88,6 @@ class single_shot_ground(AveragerProgramV2):
         self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
         self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
 
-        self.add_loop(name="iter_loop", count=cfg.expt.n_count)
-
         self.add_readoutconfig(ch=cfg.soc.ro_ch, name='ro', freq=cfg.expt.res_freq, gen_ch=cfg.soc.res_gen_ch)
 
         self.add_pulse(ch=cfg.soc.res_gen_ch, name="res_pulse", ro_ch=cfg.soc.ro_ch, 
@@ -112,9 +110,7 @@ class single_shot_excited(AveragerProgramV2):
 
         self.declare_gen(ch=cfg.soc.res_gen_ch, nqz=2)
         self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
-        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len/2)
-
-        self.add_loop(name="iter_loop", count=cfg.expt.n_count)
+        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
 
         self.add_readoutconfig(ch=cfg.soc.ro_ch, name='ro', freq=cfg.expt.res_freq, gen_ch=cfg.soc.res_gen_ch)
 
@@ -162,10 +158,13 @@ class single_shot_filtering(Experiment):
             iq_list_excited.append(prog_excited.acquire_decimated(self.soc, soft_avgs=1, progress=False)[0])
 
         t = prog_ground.get_time_axis(ro_index=0) # this may cause problems
-        Ig_filtered = np.array(iq_list_ground)[:,:,0] * self.cfg.expt.filter(len(t))
-        Qg_filtered = np.array(iq_list_ground)[:,:,0] * self.cfg.expt.filter(len(t))
-        Ie_filtered = np.array(iq_list_excited)[:,:,0] * self.cfg.expt.filter(len(t))
-        Qe_filtered = np.array(iq_list_excited)[:,:,0] * self.cfg.expt.filter(len(t))
+        print(np.shape(t))
+        print(np.shape(iq_list_ground))
+        print(np.shape(iq_list_excited))
+        Ig_filtered = np.average(np.array(iq_list_ground)[:,:,0] * self.cfg.expt.filter(len(t)), axis=1)
+        Qg_filtered = np.average(np.array(iq_list_ground)[:,:,1] * self.cfg.expt.filter(len(t)), axis=1)
+        Ie_filtered = np.average(np.array(iq_list_excited)[:,:,0] * self.cfg.expt.filter(len(t)), axis=1)
+        Qe_filtered = np.average(np.array(iq_list_excited)[:,:,1] * self.cfg.expt.filter(len(t)), axis=1)
 
         self.data = {"Ig": Ig_filtered, "Qg": Qg_filtered, "Ie": Ie_filtered, "Qe": Qe_filtered}
         return self.data

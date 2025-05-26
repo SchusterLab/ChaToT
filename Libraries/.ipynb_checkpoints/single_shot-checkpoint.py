@@ -114,7 +114,7 @@ class single_shot_excited(AveragerProgramV2):
 
         self.declare_gen(ch=cfg.soc.res_gen_ch, nqz=2)
         self.declare_gen(ch=cfg.soc.qubit_gen_ch, nqz=2)
-        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len/2)
+        self.declare_readout(ch=cfg.soc.ro_ch, length=cfg.expt.res_pulse_len)
 
         self.add_loop(name="iter_loop", count=cfg.expt.n_count)
 
